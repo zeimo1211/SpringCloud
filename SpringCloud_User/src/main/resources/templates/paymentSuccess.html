@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>支付成功</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      color: #007bff;
+      margin-top: 50px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #333;
+      margin-top: 20px;
+    }
+
+    span {
+      font-weight: bold;
+      color: #4CAF50;
+      font-size: 24px;
+    }
+
+    .container {
+      background-color: #ffffff;
+      width: 300px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>支付成功</h1>
+  <p>您的房费总额为：<span th:text="${totalCost}"></span>元</p>
+</div>
+</body>
+</html>

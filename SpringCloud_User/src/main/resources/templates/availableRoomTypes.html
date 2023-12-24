@@ -1,0 +1,59 @@
+<!--availableRoomTypes.html-->
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Available Room Types</title>
+  <!-- ... 其他样式 ... -->
+</head>
+<body>
+<h1>Available Room Types</h1>
+<form action="/availableRoomTypes" method="get">
+  Start Date: <input type="date" name="startDate" required>
+  End Date: <input type="date" name="endDate" required>
+  <input type="submit" value="查看">
+</form>
+<!-- 使用数据表格来显示房间类型、空余数量和价格 -->
+<!-- 显示房间类型和数量 -->
+<table>
+  <thead>
+  <tr>
+    <th>房间类型</th>
+    <th>空余数量</th>
+    <th>价格</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="type : ${roomTypes}">
+    <td th:text="${type.roomType}"></td>
+    <td th:text="${type.count}"></td>
+    <td th:text="${type.price}"></td>
+  </tr>
+
+  </tbody>
+</table>
+
+
+<!-- 添加预订表单 -->
+<div id="bookingForm" style="display:none;">
+  <form action="/bookRoomByType" method="post">
+    CustomerID: <input type="number" name="customerId" required><br>
+    RoomType: <input type="text" name="roomType" required><br>
+    CheckInDate: <input type="date" name="checkInDate" required><br>
+    CheckOutDate: <input type="date" name="checkOutDate" required><br>
+    Amount: <input type="number" name="amount" required><br>
+    <input type="submit" value="提交预订">
+  </form>
+</div>
+
+<!-- 使用JavaScript处理预订按钮点击事件 -->
+<script>
+  function bookRoom(roomType) {
+    document.querySelector('input[name="roomType"]').value = roomType;
+    document.getElementById('bookingForm').style.display = 'block';
+  }
+</script>
+<!-- ... -->
+</body>
+</html>

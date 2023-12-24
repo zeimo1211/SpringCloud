@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ... -->
+</head>
+<body>
+<h1>Available Rooms</h1>
+<div>
+  <ul>
+    <li th:each="room : ${rooms}">
+      <span th:text="${room.roomNumber}"></span> -
+      <span th:text="${room.roomType}"></span> -
+      <span th:text="${room.price}"></span>
+
+      <!-- 预订表单 -->
+      <form action="/bookRoom" method="post">
+        <input type="hidden" name="roomNumber" th:value="${room.roomNumber}" />
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="phone" placeholder="Your Phone" required>
+        <input type="date" name="checkInDate" required>
+        <input type="date" name="checkOutDate" required>
+        <input type="number" name="amount" placeholder="Amount" required>
+        <button type="submit">Book Now</button>
+      </form>
+    </li>
+  </ul>
+  <form action="/inputUserId" method="get">
+    <button type="submit">Cancel Booking</button>
+  </form>
+</div>
+</body>
+</html>

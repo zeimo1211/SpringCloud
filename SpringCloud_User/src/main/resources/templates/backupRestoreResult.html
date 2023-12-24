@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Backup and Restore Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('1.jpg'); /* 替换为你的背景图片路径 */
+            background-size: cover;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            text-align: center;
+            padding: 40px;
+            animation: backgroundAnimation 10s infinite alternate;
+        }
+
+        @keyframes backgroundAnimation {
+            0% {
+                background-image: url('1.jpg'); /* 初始背景图片路径 */
+            }
+            50% {
+                background-image: url('2.jpg'); /* 中间背景图片路径 */
+            }
+            100% {
+                background-image: url('3.jpg'); /* 最终背景图片路径 */
+            }
+        }
+
+        .result-message {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* 添加自定义图标 */
+        .icon-success::before {
+            content: '\2714'; /* Unicode 编码中的勾号图标 */
+            color: #4CAF50;
+            font-size: 48px;
+        }
+
+        .icon-failed::before {
+            content: '\2716'; /* Unicode 编码中的叉号图标 */
+            color: #FF5733;
+            font-size: 48px;
+        }
+
+        /* 添加返回按钮样式 */
+        .back-button {
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+<div class="result-message">
+    <span class="icon-success"></span>
+    <p th:text="${message}"></p>
+</div>
+<!-- 保留原有返回按钮，不改变其功能 -->
+<button onclick="window.history.back()" class="back-button">返回</button>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!--allRoomsDisplay.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Rooms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            background-image: url('11.jpg');
+            background-size: cover;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 1;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        td form {
+            display: inline;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .backup-restore-forms {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .backup-restore-forms form {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        .backup-restore-forms button {
+            background-color: #28a745;
+        }
+
+        .backup-restore-forms button:hover {
+            background-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+<div th:if="${message}" th:text="${message}"></div>
+<h1>All Rooms</h1>
+<table>
+    <tr>
+        <th>Room ID</th>
+        <th>Room Number</th>
+        <th>Room Type</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Booking ID</th>
+        <th>Customer Name</th>
+        <th>Check-In Date</th>
+        <th>Check-Out Date</th>
+        <th>Payment Status</th>
+        <th>Payment Date</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="room : ${rooms}">
+        <td th:text="${room.roomId}"></td>
+        <td th:text="${room.roomNumber}"></td>
+        <td th:text="${room.roomType}"></td>
+        <td th:text="${room.price}"></td>
+        <td th:text="${room.status}"></td>
+        <td th:text="${room.bookingId}"></td>
+        <td th:text="${room.customerName}"></td>
+        <td th:text="${room.checkInDate}"></td>
+        <td th:text="${room.checkOutDate}"></td>
+        <td th:text="${room.paymentStatus}"></td>
+        <td th:text="${#dates.format(room.paymentDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${room.bookingStatus}"></td>
+
+        <td>
+            <form th:action="@{/confirmBooking(roomId=${room.roomId})}" method="post">
+                <input type="hidden" name="bookingId" th:value="${room.bookingId}" />
+                <button type="submit">Confirm Booking</button>
+            </form>
+            <form th:action="@{/adminCancelBooking(roomId=${room.roomId})}" method="post">
+                <input type="hidden" name="bookingId" th:value="${room.bookingId}" />
+                <button type="submit">Cancel Booking</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<div class="backup-restore-forms">
+    <form action="/backupDatabase" method="get">
+        <button type="submit">数据库数据备份</button>
+    </form>
+    <form action="/restoreDatabase" method="get">
+        <button type="submit">数据库数据恢复</button>
+    </form>
+</div>
+<div>
+    <button id="showTotalRevenueButton">显示总收入</button>
+    <div id="totalRevenue" style="display: none;"></div>
+    <button id="goBackButton" style="display: none;">回退</button>
+</div>
+<script>
+    document.getElementById("showTotalRevenueButton").addEventListener("click", function () {
+        // 发送Ajax请求获取总收入
+        fetch("/getTotalRevenue")
+            .then(response => response.json())
+            .then(data => {
+                // 显示总收入
+                document.getElementById("totalRevenue").innerText = "总收入: " + data.totalRevenue;
+                document.getElementById("totalRevenue").style.display = "block";
+
+                // 隐藏"显示总收入"按钮，显示"回退"按钮
+                document.getElementById("showTotalRevenueButton").style.display = "none";
+                document.getElementById("goBackButton").style.display = "block";
+            });
+    });
+
+    document.getElementById("goBackButton").addEventListener("click", function () {
+        // 隐藏总收入和回退按钮，显示"显示总收入"按钮
+        document.getElementById("totalRevenue").style.display = "none";
+        document.getElementById("goBackButton").style.display = "none";
+        document.getElementById("showTotalRevenueButton").style.display = "block";
+    });
+</script>
+
+
+
+
+</body>
+</html>

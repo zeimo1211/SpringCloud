@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>运营信息</title>
+</head>
+<body>
+<h1>运营信息</h1>
+
+<h2>客户信息</h2>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>姓名</th>
+    <th>Email</th>
+    <th>电话</th>
+  </tr>
+  <tr th:each="customer : ${customers}">
+    <td th:text="${customer.CustomerID}"></td>
+    <td th:text="${customer.Name}"></td>
+    <td th:text="${customer.Email}"></td>
+    <td th:text="${customer.Phone}"></td>
+  </tr>
+</table>
+
+<!-- 类似的方式显示管理员信息、房间信息、预订信息 -->
+<h2>管理员信息</h2>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>姓名</th>
+    <!-- 其他管理员信息的表头 -->
+  </tr>
+  <tr th:each="admin : ${administrators}">
+    <td th:text="${admin.AdminID}"></td>
+    <td th:text="${admin.name}"></td>
+    <!-- 其他管理员信息的表格行 -->
+  </tr>
+</table>
+
+<h2>房间信息</h2>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>房间号</th>
+    <th>房间类型</th>
+    <th>价格</th>
+    <th>状态</th>
+  </tr>
+  <tr th:each="room : ${rooms}">
+    <td th:text="${room.RoomID}"></td>
+    <td th:text="${room.RoomNumber}"></td>
+    <td th:text="${room.RoomType}"></td>
+    <td th:text="${room.Price}"></td>
+    <td th:text="${room.Status}"></td>
+  </tr>
+</table>
+
+<h2>预订信息</h2>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>客户ID</th>
+    <th>房间ID</th>
+    <th>入住日期</th>
+    <th>退房日期</th>
+    <th>状态</th>
+  </tr>
+  <tr th:each="booking : ${bookings}">
+    <td th:text="${booking.BookingID}"></td>
+    <td th:text="${booking.CustomerID}"></td>
+    <td th:text="${booking.RoomID}"></td>
+    <td th:text="${booking.CheckInDate}"></td>
+    <td th:text="${booking.CheckOutDate}"></td>
+    <td th:text="${booking.BookingStatus}"></td>
+  </tr>
+</table>
+
+</body>
+</html>

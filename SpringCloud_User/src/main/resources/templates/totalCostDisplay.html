@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('11.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .payment-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        h1 {
+            color: #007bff;
+            margin-top: 0;
+            font-size: 24px;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="payment-container">
+    <h1>总房费: ${totalCost}</h1>
+    <form action="/processPayment" method="post">
+        <input type="number" name="paymentAmount" placeholder="输入支付金额" required>
+        <input type="submit" value="支付">
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Availability in Next Seven Days</title>
+  <style>
+    /* Add your CSS styles here for better formatting */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    div {
+      margin: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    form {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #f4f4f4;
+      border-radius: 5px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input[type="number"],
+    select,
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    button {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+<h1>Room Availability in Next Seven Days</h1>
+<div>
+  <!-- Display Room Availability -->
+  <ul>
+    <!-- Loop through room availability data -->
+    <li th:each="availability : ${roomAvailability}">
+      <span th:text="${availability.date}"></span> -
+      <span th:text="${availability.roomType}"></span> -
+      <span th:text="${availability.availableCount}"></span>
+    </li>
+  </ul>
+
+  <!-- Booking Form -->
+  <form th:action="@{/bookRoomInSevenDays}" method="post">
+    <!-- 添加隐藏的 userId 字段 -->
+    <input type="hidden" name="userId" th:value="${userId}" />
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <input type="text" name="phone" placeholder="Your Phone" required>
+    <input type="date" name="checkInDate" required>
+    <input type="date" name="checkOutDate" required>
+    <input type="number" name="amount" placeholder="Amount" required>
+    <select name="roomType">
+      <option value="Standard">Standard</option>
+      <option value="Deluxe">Deluxe</option>
+      <option value="Suite">Suite</option>
+      <!-- 其他房间类型 -->
+    </select>
+    <button type="submit">Book Now</button>
+  </form>
+</div>
+</body>
+</html>

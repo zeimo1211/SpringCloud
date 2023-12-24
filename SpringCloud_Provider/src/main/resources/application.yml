@@ -1,0 +1,24 @@
+
+server:
+    port: 8541
+#??????????
+spring:
+    datasource:
+        name: hotel
+        url: jdbc:mysql://localhost:3306/hotel?serverTimezone=UTC
+        username: root
+        password: 077418
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    application:
+        name: springcloudprovider
+
+
+eureka:
+    instance:
+        prefer-ip-address: true
+        hostname: localhost
+    client:
+        register-with-eureka: true
+        fetch-registry: false
+        service-url:
+            defaultZone: http://localhost:8543/eureka/
